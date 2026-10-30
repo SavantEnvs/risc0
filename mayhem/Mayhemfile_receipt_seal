@@ -1,0 +1,12 @@
+# Upstream's own cargo-fuzz target (risc0/fuzz/fuzz_targets/receipt_seal.rs): reinterprets the input as a
+# u32 seal and calls risc0_circuit_rv32im::verify, looking for panics in the receipt verifier.
+project: savantenvs/risc0
+target: receipt_seal
+
+testsuite:
+  - https://$MAYHEM_DOMAIN/$MAYHEM_PROJECT/$MAYHEM_TARGET/testsuite.tar
+  - file://mayhem/receipt_seal/testsuite
+
+cmds:
+  - cmd: /mayhem/receipt_seal
+    libfuzzer: true
